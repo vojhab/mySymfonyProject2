@@ -1,23 +1,29 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\NamesEntity;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 
 class NamesController extends AbstractController
 {
     /**
     * @Route("/")
     */
-    public function names(): Response
+    public function names(ManagerRegistry $doctrine): Response
     {
-        $firstName = "Jan";
-        $secondName = "Novák";
+        $entityManager = $doctrine->getManager();
 
-        return $this->render('index.html.twig', [
-            'firstName' => $firstName,
-            'secondName' => $secondName,
-        ]);
+        $newName = new NamesEntity();
+        $newName->setFirstName("Michal");
+        $newName->setSecondName("Svoboda");
+
+        $entityManager->persist($newName);
+
+        $entityManager->flush();
+
+        return new Response('Saved new name '.$newName->getFirstName());
     }
 }
