@@ -1,11 +1,10 @@
 <?php
 namespace App\Entity;
 
-use App\Repository\NamesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\Entity(repositoryClass=App\Repository\NamesRepository::class)
  */
 class Name
 {
@@ -26,8 +25,6 @@ class Name
      */
     private $secondName;
 
-    // getter and setter methods
-
     public function getId()
     {
         return $this->id;
@@ -38,7 +35,7 @@ class Name
         return $this->firstName;
     }
 
-    public function setFirstName()
+    public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
     }
@@ -48,7 +45,7 @@ class Name
         return $this->secondName;
     }
 
-    public function setSecondName()
+    public function setSecondName($secondName)
     {
         $this->secondName = $secondName;
     }
