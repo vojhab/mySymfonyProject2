@@ -12,9 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class NamesController extends AbstractController
 {
-    /**
-     * @Route("/show")
-     */
+    #[Route("/show")]
     public function show(ManagerRegistry $doctrine): Response
     {
         $names = $doctrine
@@ -26,9 +24,7 @@ class NamesController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/save")
-     */
+    #[Route("/save")]
     public function save(ManagerRegistry $doctrine, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
@@ -57,9 +53,7 @@ class NamesController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/delete/{id}")
-     */
+    #[Route("/delete/{id}")]
     public function delete(ManagerRegistry $doctrine, int $id)
     {
         $entityManager = $doctrine->getManager();
